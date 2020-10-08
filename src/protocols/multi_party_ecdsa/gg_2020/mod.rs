@@ -16,8 +16,8 @@
 
 pub mod blame;
 pub mod party_i;
-#[cfg(test)]
-mod test;
+//#[cfg(test)]
+pub mod test;
 
 #[derive(Clone, Debug)]
 pub struct ErrorType {
