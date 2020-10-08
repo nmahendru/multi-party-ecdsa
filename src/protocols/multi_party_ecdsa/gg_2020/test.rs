@@ -60,6 +60,10 @@ fn test_sign_n2_t1_ttag1() {
     let _ = sign(1, 2, 2, vec![0, 1], 0, &[0]);
 }
 
+pub fn test_mpc() {
+    let _ = sign(1, 2, 2, vec![0, 1], 0, &[0]);
+}
+
 #[test]
 fn test_sign_n5_t2_ttag4() {
     let _ = sign(2, 5, 4, vec![0, 2, 3, 4], 0, &[0]);
@@ -417,7 +421,7 @@ fn keygen_orchestrator(
         h1_h2_N_tilde_vec,
     ))
 }
-fn keygen_t_n_parties(
+pub fn keygen_t_n_parties(
     t: u16,
     n: u16,
 ) -> Result<
@@ -537,7 +541,7 @@ fn keygen_t_n_parties(
     ))
 }
 
-fn sign(
+pub fn sign(
     t: u16,
     n: u16,
     ttag: u16,
