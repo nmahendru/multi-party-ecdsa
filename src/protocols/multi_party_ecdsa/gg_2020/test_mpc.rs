@@ -17,9 +17,12 @@
 */
 
 use crate::protocols::multi_party_ecdsa::gg_2020::blame::GlobalStatePhase5;
+#[cfg(test)]
 use crate::protocols::multi_party_ecdsa::gg_2020::party_i::{
-    KeyGenBroadcastMessage1, KeyGenDecommitMessage1, Keys, LocalSignature, Parameters,
-    PartyPrivate, SharedKeys, SignKeys,
+    KeyGenBroadcastMessage1, KeyGenDecommitMessage1,
+};
+use crate::protocols::multi_party_ecdsa::gg_2020::party_i::{
+    Keys, LocalSignature, Parameters, PartyPrivate, SharedKeys, SignKeys,
 };
 use crate::utilities::mta::{MessageA, MessageB};
 
@@ -37,6 +40,7 @@ use curv::cryptographic_primitives::proofs::sigma_dlog::DLogProof;
 use curv::cryptographic_primitives::secret_sharing::feldman_vss::VerifiableSS;
 use curv::elliptic::curves::traits::*;
 use curv::{FE, GE};
+use log;
 use paillier::*;
 use zk_paillier::zkproofs::DLogStatement;
 
@@ -436,6 +440,7 @@ pub fn keygen_t_n_parties(
     ),
     ErrorType,
 > {
+    log::info!("Called Keygen.");
     let params = Parameters {
         threshold: t,
         share_count: n,
@@ -549,6 +554,7 @@ pub fn sign(
     corrupt_step: usize,
     corrupted_parties: &[usize],
 ) -> Result<SignatureRecid, ErrorType> {
+    log::info!("Entering sign");
     // full key gen emulation
     let (party_keys_vec, shared_keys_vec, pk_vec, y, vss_scheme, ek_vec, dlog_statement_vec) =
         keygen_t_n_parties(t, n).unwrap();
@@ -990,6 +996,7 @@ fn check_sig(r: &FE, s: &FE, msg: &BigInt, pk: &GE) {
 
     let is_correct = verify(&msg, &secp_sig, &pk);
     assert!(is_correct);
+    log::info!("Exiting sign");
 }
 
 #[test]

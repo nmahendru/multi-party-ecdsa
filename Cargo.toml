@@ -36,7 +36,7 @@ subtle = { version = "2" }
 serde = { version = "1.0", features = ["derive"] }
 zeroize = "0.10.1"
 libsecp256k1 = "0.3.2"
-
+log = {version = "0.4.6", features = ["std"]}
 [dependencies.curv]
 git = "https://github.com/PolySignInc/curv"
 branch = "v0.2.6t"
